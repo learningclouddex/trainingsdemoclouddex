@@ -1,0 +1,22 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t sandeshdockerreact:latest .
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'clouddex-docker'
+  env: 	'Clouddexdocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-465144203179'
+  bucket_path: 'clouddex-docker'
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_acess_key:
+    secure: $AWS_SECRET_KEY    
